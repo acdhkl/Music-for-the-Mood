@@ -22,10 +22,47 @@
                     <%= song.name  %>
                 </h5>
                 <p class="card-text">
-                    Artist Name
+                    <%= song.artist %>
                 </p>
                 <p>
-                    <a class="btn btn-primary" href="#">listen here</a>
+                    <button class="btn btn-info">listen here</button>
+                    <form action="/songs/<%= song._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+    <% } %>
+    <% }) %>
+</div>
+<% }) %>
+<!-- END OF TYPE OF SONG -->
+
+
+<!-- TYPE OF MUSIC -->
+<div class="jumbotron">
+    <h2>
+        ALL SONGS IN DB
+    </h2>
+</div>
+
+<div class="row">
+    <% songs.forEach(function(song){ %>
+
+    <div class="col-md-2">
+        <div class="card">
+            <img class="card-img-top" alt="Bootstrap Thumbnail First" src="<%= song.image %> " />
+            <div class="card-block">
+                <h5 class="card-title">
+                    <%= song.name  %>
+                </h5>
+                <p class="card-text">
+                    <%= song.artist %>
+                </p>
+                <p>
+                    <button class="btn btn-info">listen here</button>
                 <form action="/songs/<%= song._id %>?_method=DELETE" method="POST">
                     <button class="btn btn-danger">Delete</button>
                 </form>
@@ -34,10 +71,10 @@
             </div>
         </div>
     </div>
-        <% } %>
+
     <% }) %>
 </div>
-<% }) %>
+
 <!-- END OF TYPE OF SONG -->
 
 <%- include("../partials/footer.ejs") %>
