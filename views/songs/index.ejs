@@ -1,17 +1,19 @@
 <%- include("../partials/header.ejs") %>
-
 <p>
     <a href="/songs/new" class="btn btn-info">Add a new song</a>
 </p>
+
+<% genres.forEach(function(genre){ %>
 <!-- TYPE OF MUSIC -->
 <div class="jumbotron">
     <h2>
-        WORKOUT SONGS
+        <%= genre.toUpperCase() %> SONGS
     </h2>
 </div>
+
 <div class="row">
     <% songs.forEach(function(song){ %>
-    <% if(song.type && song.type.toLowerCase() === "workout"){ %>
+    <% if(song.type && song.type.toLowerCase() === genre.toLowerCase()){ %>
     <div class="col-md-2">
         <div class="card">
             <img class="card-img-top" alt="Bootstrap Thumbnail First" src="<%= song.image %> " />
@@ -24,53 +26,18 @@
                 </p>
                 <p>
                     <a class="btn btn-primary" href="#">listen here</a>
-                    <a class="btn btn-danger" href="#">Delete</a>
+                <form action="/songs/<%= song._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
                 </p>
-                
+
             </div>
         </div>
     </div>
-    <% } %>
+        <% } %>
     <% }) %>
 </div>
+<% }) %>
 <!-- END OF TYPE OF SONG -->
-
-<!-- TYPE OF MUSIC -->
-<div class="jumbotron">
-    <h2>
-        SAD SONGS
-    </h2>
-</div>
-<div class="row">
-    <% songs.forEach(function(song){ %>
-    <% if(song.type && song.type.toLowerCase() === "sad"){ %>
-    <div class="col-md-2">
-        <div class="card">
-            <img class="card-img-top" alt="Bootstrap Thumbnail First" src="<%= song.image %> " />
-            <div class="card-block">
-                <h5 class="card-title">
-                    <%= song.name  %>
-                </h5>
-                <p class="card-text">
-                    Artist Name
-                </p>
-                <p>
-                    <a class="btn btn-primary" href="#">listen here</a>
-                    <a class="btn btn-danger" href="#">Delete</a>
-                </p>
-                
-                   
-               
-            </div>
-        </div>
-    </div>
-    <% } %>
-    <% }) %>
-</div>
-<!-- END OF TYPE OF SONG -->
-
-
-</div>
-</div>
 
 <%- include("../partials/footer.ejs") %>
