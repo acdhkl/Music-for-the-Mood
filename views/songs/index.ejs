@@ -1,7 +1,4 @@
-<%- include("../partials/header.ejs") %>
-<p>
-    <a href="/songs/new" class="btn btn-info">Add a new song</a>
-</p>
+<%- include("../partials/header.ejs", {currentUser: currentUser}) %>
 
 <% genres.forEach(function(genre){ %>
 <!-- TYPE OF MUSIC -->
@@ -14,24 +11,22 @@
 <div class="row">
     <% songs.forEach(function(song){ %>
     <% if(song.type && song.type.toLowerCase() === genre.toLowerCase()){ %>
-    <div class="col-md-2">
-        <div class="card">
-            <img class="card-img-top" alt="Bootstrap Thumbnail First" src="<%= song.image %> " />
-            <div class="card-block">
-                <h5 class="card-title">
-                    <%= song.name  %>
-                </h5>
-                <p class="card-text">
-                    <%= song.artist %>
-                </p>
+    <div class="card col-sm-6 col-lg-3">
+        <iframe class=" card-img-top" src="https://open.spotify.com/embed/track/<%= song.spotifyId%>" height="300"
+            frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <div class="card-block">
+            <p> <%= song.authors.length %> </p>
+            <div class="btn-group" role="group" aria-label="Basic example">
                 <p>
-                    <button class="btn btn-info">listen here</button>
-                    <form action="/songs/<%= song._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                <form action="/songs/<%= song._id %>?_method=PUT" method="POST">
+                    <button class="btn btn-info">Upvote</button>
+                </form>
+                <form action="/songs/<%= song._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
                 </p>
-                
             </div>
+
         </div>
     </div>
     <% } %>
@@ -76,5 +71,6 @@
 </div>
 
 <!-- END OF TYPE OF SONG -->
+
 
 <%- include("../partials/footer.ejs") %>
