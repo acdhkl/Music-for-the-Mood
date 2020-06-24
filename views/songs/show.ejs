@@ -1,0 +1,36 @@
+<%- include("../partials/header") %>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<p class="lead">
+					Who likes this <%= song.type.toLowerCase() %> song?
+				</p>
+				<div class="list-group">
+                    <% song.authors.forEach(function(user){ %>
+                        <li class="list-group-item ">
+                            <a href="/profile/<%=user.id %>"><%= user.username %> </a>
+                        </li>
+                    <% }) %> 
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="thumbnail">
+					<img class="img-responsive" src="<%= song.image %>">
+					<div class="caption-full">
+						<h4>
+							<a>
+								<%= song.name %>
+							</a>
+						</h4>
+					</div>
+				</div>
+				<div class="well">
+					
+					<hr>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<%- include("../partials/footer") %>

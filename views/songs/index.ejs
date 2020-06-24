@@ -1,75 +1,41 @@
 <%- include("../partials/header.ejs", {currentUser: currentUser}) %>
+<% var helpers = include("../../helpers.js"); %>
 
 <% genres.forEach(function(genre){ %>
 <!-- TYPE OF MUSIC -->
-<div class="jumbotron">
+<div class="jumbotron text-white text-center">
     <h2>
         <%= genre.toUpperCase() %> SONGS
     </h2>
 </div>
 
 <div class="row">
-    <% songs.forEach(function(song){ %>
-    <% if(song.type && song.type.toLowerCase() === genre.toLowerCase()){ %>
+    <% var songsOfGenre = songs.filter(song => song.type.toLowerCase() === genre.toLowerCase()).
+    sort(function(a,b){return b.authors.length-a.authors.length});%>
+ 
+    <% songsOfGenre.forEach(function(song){ %>
     <div class="card col-sm-6 col-lg-3">
         <iframe class=" card-img-top" src="https://open.spotify.com/embed/track/<%= song.spotifyId%>" height="300"
             frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         <div class="card-block">
-            <p> <%= song.authors.length %> </p>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <p>
-                <form action="/songs/<%= song._id %>?_method=PUT" method="POST">
+            <p class="upvotes"> <%= song.authors.length %> </p>
+            <div role="group" aria-label="Basic example">
+                <p >
+                <form class="float-left"action="/songs/<%= song._id %>?_method=PUT" method="POST">
                     <button class="btn btn-info">Upvote</button>
                 </form>
-                <form action="/songs/<%= song._id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-danger">Delete</button>
+                <form class="float-right" action="/songs/<%= song._id %>" method="GET">
+                    <button class="btn btn-info">See who likes this song!</button>
                 </form>
                 </p>
             </div>
-
         </div>
     </div>
-    <% } %>
     <% }) %>
 </div>
+
+
 <% }) %>
-<!-- END OF TYPE OF SONG -->
-
-
-<!-- TYPE OF MUSIC -->
-<div class="jumbotron">
-    <h2>
-        ALL SONGS IN DB
-    </h2>
-</div>
-
-<div class="row">
-    <% songs.forEach(function(song){ %>
-
-    <div class="col-md-2">
-        <div class="card">
-            <img class="card-img-top" alt="Bootstrap Thumbnail First" src="<%= song.image %> " />
-            <div class="card-block">
-                <h5 class="card-title">
-                    <%= song.name  %>
-                </h5>
-                <p class="card-text">
-                    <%= song.artist %>
-                </p>
-                <p>
-                    <button class="btn btn-info">listen here</button>
-                <form action="/songs/<%= song._id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-danger">Delete</button>
-                </form>
-                </p>
-
-            </div>
-        </div>
-    </div>
-
-    <% }) %>
-</div>
-
 <!-- END OF TYPE OF SONG -->
 
 

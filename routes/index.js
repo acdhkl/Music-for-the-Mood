@@ -26,11 +26,12 @@ router.post('/register', function (req, res) {
     var newUser = new User({ username: req.body.username });
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
-            console.log(err);
-            return res.render('register');
+            req.flash("error", err.message);
+            return res.redirect('register');
         }
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/songs');
+            req.flash("success", "Welcome to Song Reccomender, " + req.user.username);
+            res.redirect('/profile/' + req.user.id);
         });
     });
 });
@@ -54,32 +55,37 @@ router.post(
 //logout route
 router.get("/logout", function (req, res) {
     req.logout();
+    req.flash("success", "Logged you out");
     res.redirect("/songs");
 });
 
 //Show a profile page of a user
 router.get("/profile/:id", function (req, res) {
     var userToPopulate = User.findById(req.params.id, function (err, user) {
-        if (err || !user) {
+        if (err) {
+            req.flash("error", err.message);
             res.redirect('/songs');
+        } else if (!user) {
+            req.flash("error", "Looks like this user does not exist!")
+            res.redirect('/songs')
         } else {
             userToPopulate.populate('songs').exec((err, user) => {
                 if (err) {
+                    req.flash("error", err.message);
                     res.redirect("/songs");
                 } else {
                     Song.find({}, function (err, allSongs) {
                         if (err) {
-                            console.log(err);
+                            req.flash("error", err.message);
                         } else {
                             res.render("profile", {
                                 songs: allSongs,
                                 currentUser: req.user,
                                 user: user,
-                                genres: helpers.genres
+                                genres: helpers.shuffle(genres)
                             });
                         }
                     });
-
                 }
             });
         }
@@ -88,4 +94,4 @@ router.get("/profile/:id", function (req, res) {
 
 
 
-    module.exports = router;
+module.exports = router;

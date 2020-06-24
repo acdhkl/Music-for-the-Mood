@@ -1,11 +1,81 @@
+.avatar {
+    border-radius: 50%;
+    height: 120px;
+  }
 iframe {
     width: 100%
 }
 
 .card {
     margin: 5px 0px;
+    border: none;
+    font-size: .90rem;
+}
+
+.upvotes {
+    color: green;
 }
 
 h2 {
-    color: green;
+    
+    justify-content: center;
+    font-weight: 600;
+    font-size: xx-large;
 }
+.jumbotron {
+    background-color:#313131 !important;
+}
+
+.main {
+    background: #ffffff;
+    z-index: 3;
+  }
+.main-raised {
+    margin: -60px 30px 0px;
+    border-radius: 6px;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  }
+
+.nav-pills .nav-item .nav-link {
+    line-height: 30px;
+    font-size: 24px;
+    font-weight: 600;
+    min-width: 100px;
+    transition: all 0.6s;
+    border-radius: 30px;
+    padding: 10px 15px;
+    text-align: center;
+}
+.navbar {
+    margin-bottom: 20px;
+
+}
+
+.navbar .navbar-brand, .nav-link {
+    height: 50px;
+    line-height: 30px;
+    padding: .625rem 0;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+}
+.navbar.navbar-transparent {
+    z-index: 1030;
+    background-color: transparent!important;
+    box-shadow: none !important;
+    color: #fff;
+}
+
+.page-header {
+    height: 40vh;
+    background-size: cover;
+  }
+
+  .profile-page .profile img {
+    max-width: 160px;
+    width: 100%;
+    -webkit-transform: translate3d(0, -50%, 0);
+    -moz-transform: translate3d(0, -50%, 0);
+    -o-transform: translate3d(0, -50%, 0);
+    -ms-transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0);
+  }

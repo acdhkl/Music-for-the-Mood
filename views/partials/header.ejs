@@ -3,36 +3,38 @@
 
 <head>
     <title>Song recommender</title>
-    
+    <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    <!-- Not Sure -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
+    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-
-    <link rel="stylesgeet" href="https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css">
+    <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/stylesheets/main.css">
-    
+
 </head>
 
 <body>
     <!-- NAVBAR -->
-    <div class="container-fluid">
+    
         <div class="row">
             <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light navbar-transparent" color-on-scroll="100">
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#authbuttons">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- Navbar links -->
-                    <a class="navbar-brand" href="/songs">Test search by id</a>
+                    <a class="navbar-brand" href="/songs">Song Reccomender</a>
                     <div class="collapse navbar-collapse" id="authbuttons">
                         <ul class="navbar-nav ml-md-auto">
                             <%if(!currentUser){%>
@@ -60,4 +62,18 @@
                     </ul>
                 </div>
             </nav>
+            </div>
+        </div>
             <!-- END OF NAVBAR -->
+            <div class="container">
+                <% if(error && error.length > 0){ %> 
+            <div class="alert alert-danger" role="alert">
+                <%= error  %>
+            </div>
+        <% } %> 
+        <% if(success && success.length > 0){ %> 
+            <div class="alert alert-success" role="alert">
+                 <%= success  %>
+            </div>
+            <% } %> 
+            </div>

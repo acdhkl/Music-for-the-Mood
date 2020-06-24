@@ -1,0 +1,25 @@
+<%- include("../partials/header.ejs", {currentUser: currentUser}) %>
+<% console.log(data) %>
+
+<div class="row">
+    <% data.forEach(function(song){ %>
+    <div class="col-sm-4 ">
+        <div class="card">
+            <img class="card-img-top" alt="Bootstrap Thumbnail First" src="<%= song.album.images[0].url %> " />
+            <div class="card-block">
+                <h5 class="card-title">
+                    <%= song.name  %>
+                </h5>
+                <p class="card-text">
+                    <%= song.artists[0].name %>
+                </p>
+                <p>
+                <form action="/songs/<%= song.id %>/<%= genre %>" method="POST">
+                    <button class="btn btn-info">Add to collection</button>
+                </form>
+                </p>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>
