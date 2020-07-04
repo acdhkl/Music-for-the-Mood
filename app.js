@@ -24,6 +24,7 @@ var songRoutes = require('./routes/songs'),
 // });
 mongoose.connect("mongodb+srv://dhakalavinav:" + process.env.password + "@musicforthemood.kpi2s.mongodb.net/<dbname>?retryWrites=true&w=majority",
     {
+        useUnifiedTopology: true,
         useNewUrlParser: true,
         useCreateIndex: true
     }).then(() => {
@@ -70,6 +71,6 @@ app.use(songRoutes);
 
 
 //STARTING SERVER
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
     console.log("Server has started");
 });
