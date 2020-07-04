@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Song recommender</title>
+    <title>Music for the Mood</title>
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -20,6 +20,8 @@
         crossorigin="anonymous"></script>
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js">
 
 </head>
 
@@ -28,13 +30,13 @@
     
         <div class="row">
             <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-light navbar-transparent" color-on-scroll="100">
+                <nav class="navbar navbar-expand-md navbar-light navbar-transparent">
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#authbuttons">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- Navbar links -->
-                    <a class="navbar-brand" href="/songs">Song Reccomender</a>
+                    <a class="navbar-brand" href="/songs">Music for the Mood</a>
                     <div class="collapse navbar-collapse" id="authbuttons">
                         <ul class="navbar-nav ml-md-auto">
                             <%if(!currentUser){%>

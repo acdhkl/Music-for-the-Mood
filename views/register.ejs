@@ -1,13 +1,33 @@
-<%- include("./partials/header") %>
-<h1>
-	Sign Up!
-</h1>
-
-<form action="/register" method="post">
-	<input type="text" name="username" placeholder="username">
-	<input type="password" name="password" placeholder="password">
-	<button>
-		Sign Up
-	</button>
-</form>
+<%- include("./partials/header.ejs") %>
+<div class="login-form">
+    <form action="/register" method="post">
+		<h2 class="text-center mb-2">Create an Account</h2>  
+		<p class="text-center">Please fill in this form to create an account!</p>
+		<hr>
+		<div class="form-group">
+			<div class="row">
+				<div class="col">
+					<input type="text" name="first_name" class="form-control"  placeholder="First Name" required="required">
+				</div>
+				<div class="col">
+					<input type="text" name="last_name"  class="form-control"  placeholder="Last Name" required="required">
+				</div>
+			</div>        	
+        </div>     
+        <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="Username" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+		</div>
+		<div class="text-center">Already have an account? <a href="/login">Login here</a></div>
+         
+	</form>
+	
+</div>
+</body>
+</html>
 <%- include("./partials/footer") %>

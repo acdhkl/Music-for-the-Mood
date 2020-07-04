@@ -14,7 +14,9 @@ var songSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User"
 		},
-    username: String
+    username: String,
+    firstName: String,
+    lastName: String
     }]
 });
 

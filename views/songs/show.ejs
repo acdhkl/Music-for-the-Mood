@@ -3,12 +3,12 @@
 		<div class="row">
 			<div class="col-md-3">
 				<p class="lead">
-					Who likes this <%= song.type.toLowerCase() %> song?
+					Find users who enjoy this song
 				</p>
 				<div class="list-group">
                     <% song.authors.forEach(function(user){ %>
                         <li class="list-group-item ">
-                            <a href="/profile/<%=user.id %>"><%= user.username %> </a>
+                            <a href="/profile/<%=user.id %>"><%= user.firstName + " " + user.lastName.substring(0,1) + "."%> </a>
                         </li>
                     <% }) %> 
 				</div>

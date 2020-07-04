@@ -6,6 +6,7 @@ var router = express.Router();
 var Song = require('../models/song.js');
 var User = require("../models/user.js");
 const song = require("../models/song.js");
+const { isLoggedIn } = require("../helpers.js");
 Spotify = require('node-spotify-api');
 var genres = helpers.genres;
 
@@ -38,8 +39,8 @@ router.get('/songs/new', helpers.isLoggedIn, function (req, res) {
     });
 });
 
-router.get('/songs/newer', function (req, res) {
-    res.render('songs/newer', {
+router.get('/songs/new', isLoggedIn, function (req, res) {
+    res.render('songs/new', {
         genres: genres.sort()
     });
 })
@@ -92,7 +93,9 @@ router.post('/songs/:id/:genre', helpers.isLoggedIn, function (req, res) {
 
                     var author = {
                         id: req.user._id,
-                        username: req.user.username
+                        username: req.user.username,
+                        firstName: req.user.firstName,
+                        lastName: req.user.lastName
                     }
                     var newSong = {
                         name: name,

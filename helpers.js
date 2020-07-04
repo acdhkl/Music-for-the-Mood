@@ -1,5 +1,13 @@
 var helpersObj = {};
-const genres = ["Workout", "Sad"];
+const genres = ["Workout", 
+                "Summer Vibes",
+                "Chill",
+                "Heartbreak",
+                "Late Night Drive",
+                "Clubbing",
+                "House Party",
+                "Study"
+];
 
 // All genres of music
 helpersObj.genres = genres;
