@@ -39,7 +39,7 @@ app.use(flash());
 
 //PASSPORT CONFIG
 
-app.use(require("express-session")({
+app.use(require("cookie-session")({
     secret: "This is a secret shh",
     resave: false,
     saveUninitialized: false
