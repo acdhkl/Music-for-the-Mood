@@ -12,8 +12,8 @@ var genres = helpers.genres;
 
 
 var spotify = new Spotify({
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET
+    id: "5693ec6260644df0bca1902686fc3908",
+    secret: "0c283c0ab2e14f9a8dfbccbfaaa0725d"
 });
 
 //HOME PAGE- DISPLAY EVERY SINGLE SONG
