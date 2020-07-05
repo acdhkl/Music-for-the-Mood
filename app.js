@@ -22,7 +22,7 @@ var songRoutes = require('./routes/songs'),
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // });
-mongoose.connect("mongodb+srv://dhakalavinav:" + process.env.password + "@musicforthemood.kpi2s.mongodb.net/<dbname>?retryWrites=true&w=majority",
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/song_reccomender',
     {
         useUnifiedTopology: true,
         useNewUrlParser: true,
