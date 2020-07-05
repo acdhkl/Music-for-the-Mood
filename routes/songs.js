@@ -12,8 +12,8 @@ var genres = helpers.genres;
 
 
 var spotify = new Spotify({
-    id:"5693ec6260644df0bca1902686fc3908",
-    secret:"0c283c0ab2e14f9a8dfbccbfaaa0725d"
+    id: process.env.CLIENT_ID,
+    secret: process.env.CLIENT_SECRET
 });
 
 //HOME PAGE- DISPLAY EVERY SINGLE SONG
@@ -46,19 +46,19 @@ router.get('/songs/new', isLoggedIn, function (req, res) {
 })
 
 //Results page
-router.post("/songs/results", function(req,res){
+router.post("/songs/results", function (req, res) {
     spotify
-    .search({ type: 'track', query: req.body.query, limit: 12 })
-    .then(function(response) {
-    res.render("songs/results.ejs", {
-        data: response.tracks.items,
-        genre: req.body.genre
-    })
-  })
-  .catch(function(err) {
-    req.flash("error", "cannot find anything")
-    res.redirect("/songs");
-  });
+        .search({ type: 'track', query: req.body.query, limit: 12 })
+        .then(function (response) {
+            res.render("songs/results.ejs", {
+                data: response.tracks.items,
+                genre: req.body.genre
+            })
+        })
+        .catch(function (err) {
+            req.flash("error", "cannot find anything")
+            res.redirect("/songs");
+        });
 
 })
 
@@ -186,15 +186,16 @@ router.delete("/songs/:id", helpers.isLoggedIn, function (req, res) {
 
 });
 
-router.get("/songs/:id", function(req, res){
-    Song.findById(req.params.id, function(err, song) {
-        if(err) {
+router.get("/songs/:id", function (req, res) {
+    Song.findById(req.params.id, function (err, song) {
+        if (err) {
             console.log(err);
-        }else{
-        res.render("songs/show", {
-            song : song
-        });
-    }});
+        } else {
+            res.render("songs/show", {
+                song: song
+            });
+        }
+    });
 });
 
 router.get("/test", function (req, res) {

@@ -7,21 +7,13 @@ var express = require("express"),
     LocalStrategy = require("passport-local"),
     flash = require("connect-flash"),
     User = require("./models/user.js"),
-    seedDB = require('./seeds');
-Song = require('./models/song.js');
+    Song = require('./models/song.js'),
+    songRoutes = require('./routes/songs'),
+    indexRoutes = require('./routes/index');
 
 require('dotenv').config();
 
-// seedDB();
-var songRoutes = require('./routes/songs'),
-    indexRoutes = require('./routes/index');
-
-
-
-// mongoose.connect("mongodb://localhost/song_reccomender", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
+// CONNECT TO MONGO DATABASE
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/song_reccomender',
     {
         useUnifiedTopology: true,
@@ -37,14 +29,13 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-//PASSPORT CONFIG
-
 app.use(require("cookie-session")({
     secret: "This is a secret shh",
     resave: false,
     saveUninitialized: false
 }));
 
+//PASSPORT CONFIG
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
