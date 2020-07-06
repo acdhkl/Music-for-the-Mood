@@ -1,73 +1,83 @@
 <%- include("../partials/header.ejs", {currentUser: currentUser}) %>
 <% var helpers = include("../../helpers.js"); %>
 
-<% if(currentUser) { %>
-    <div class="d-flex justify-content-center">
+
+<div class="d-flex justify-content-center">
     <p>
-        <a id= "addSongBtn" href="/songs/new" class="btn btn-success">
-             Add a new song</a>
+        <a id="addSongBtn" href="/songs/new" class="btn btn-success">
+            <i class="fas fa-upload"></i> Add a new song</a>
     </p>
 </div>
-    <% } %>
-  <div class="accordion" id="songAccordion">
-<% genres.forEach(function(genre){ %>
-    <div class="card">
-      <div class="card-header header" id=<%= "heading" + genre.replace(/\s+/g, ''); %>>
-        <button 
-        <% if(genres[0] == genre){ %>
-            class="btn btn-lg btn-primary  text-left" aria-expanded= "true"
-        <% } else { %>  
-            class="btn btn-lg btn-primary  text-left collapsed" aria-expanded="false"
-         <% } %> 
-         type="button" data-toggle="collapse" data-target=<%= "#collapse" + genre %>  aria-controls= <%= "collapse" + genre %>>
-          <%= genre %>  
-        </button>
-      
-    </div>
 
-    <div id=<%= "collapse" + genre %> class="collapse" aria-labelledby=<%= "heading" + genre %> data-parent="#songAccordion">
-        <% var songsOfGenre = songs.filter(song => song.type.toLowerCase() === genre.toLowerCase()).
+<div class="accordion" id="songAccordion">
+    <% genres.forEach(function(genre){ %>
+    <div class="card">
+        <div class="card-header header" id=<%= "heading" + genre.replace(/\s+/g, ''); %>>
+            <button <% if(genres[0] == genre){ %> class="btn btn-lg btn-default  text-left" aria-expanded="true"
+                <% } else { %> class="btn btn-lg btn  text-left collapsed" aria-expanded="false" <% } %> type="button"
+                data-toggle="collapse" data-target=<%= "#collapse" + genre %> aria-controls=<%= "collapse" + genre %>>
+                <%= genre %>
+            </button>
+        </div>
+
+        <div id=<%= "collapse" + genre %> class="collapse" aria-labelledby=<%= "heading" + genre %>
+            data-parent="#songAccordion">
+            <% var songsOfGenre = songs.filter(song => song.type.toLowerCase() === genre.toLowerCase()).
     sort(function(a,b){return b.authors.length-a.authors.length});%>
-    <div class="card-body">
-        <div class="row">
-     <% for(var i = 0; i < 4; i++){%>
-        <% if(songsOfGenre[i] == undefined){ %>
-            <% break; %>  
-        <% } else{ %> 
-            <div class="cards col-sm-6 col-lg-3">
-                <iframe class=" card-img-top" src="https://open.spotify.com/embed/track/<%= songsOfGenre[i].spotifyId%>" height="300"
-                    frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                <div class="card-block">
-                    <p class="upvotes"> <%= songsOfGenre[i].authors.length %> </p>
-                    <div role="group" aria-label="Basic example">
-                        <p >
-                        <form class="float-left"action="/songs/<%= songsOfGenre[i]._id %>?_method=PUT" method="POST">
-                            <button class="btn btn-info">Upvote</button>
-                        </form>
-                        <form class="float-right" action="/songs/<%= songsOfGenre[i]._id %>" method="GET">
-                            <button class="btn btn-info">More info</button>
-                        </form>
-                        </p>
+            <div class="card-body">
+                <div class="row">
+                    <% for(var i = 0; i < 4; i++){%>
+                    <% if(songsOfGenre[i] == undefined){ %>
+                    <% break; %>
+                    <% } else{ %>
+                    <div class="cards col-sm-6 col-lg-3">
+                        <iframe class=" card-img-top"
+                            src="https://open.spotify.com/embed/track/<%= songsOfGenre[i].spotifyId%>" height="300"
+                            frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <div class="card-block">
+                            <p class="upvotes"><i class="fas fa-thumbs-up"></i> <%= songsOfGenre[i].authors.length %> </p>
+                            <div role="group" aria-label="Basic example">
+                                <p>
+                                    <% if(currentUser){ %>
+
+                                    <% if(currentUser.songs.includes(songsOfGenre[i]._id)){ %>
+                                <form class="float-left">
+                                    <button class="btn btn-success" disabled title="Remove from my collection"><i class="fas fa-check"></i></i></button>
+                                </form>
+
+                                <% } else { %>
+
+                                <form class="float-left" action="/songs/<%= songsOfGenre[i]._id %>?_method=PUT"
+                                    method="POST">
+                                    <button class="btn btn-success"><i class="fas fa-thumbs-up"></i></button>
+                                </form>
+                                <% } %>
+                                <% } %>
+                                </p>
+                                <form class="float-right" action="/songs/<%= songsOfGenre[i]._id %>" method="GET">
+                                    <button class="btn btn-info">More info</button>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
+                    <% } }%>
                 </div>
             </div>
-        <% } }%>
         </div>
-    </div>
-  </div>
-<!-- TYPE OF MUSIC -->
-
-    
- 
-   
+        <!-- TYPE OF MUSIC -->
 
 
 
-<% }) %>
-<!-- END OF TYPE OF SONG -->
 
-<div class=" text-center">
-    © 2020 Copyright: Avinav Dhakal
-</div>
 
-<%- include("../partials/footer.ejs") %>
+
+
+        <% }) %>
+        <!-- END OF TYPE OF SONG -->
+
+        <div class=" text-center">
+            © 2020 Copyright: Avinav Dhakal
+        </div>
+
+        <%- include("../partials/footer.ejs") %>

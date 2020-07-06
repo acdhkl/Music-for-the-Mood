@@ -16,15 +16,15 @@
                     <div class="col-md-6 ml-auto mr-auto text-center">
                         <div class="profile">
                             <div class="avatar">
-                                <img src="https://is2-ssl.mzstatic.com/image/thumb/Purple113/v4/83/e5/be/83e5bed3-5255-5fae-df80-8e0ca8703e6a/source/256x256bb.jpg"
-                                    alt="Circle Image" class=" rounded-circle img-fluid">
+                                <img
+                                src="https://i.imgur.com/KPNvz83.jpg" class=" rounded-circle img-fluid">
                             </div>
                             <h3><%= user.firstName + " " + user.lastName %> </h3>
                             <p class="text-center">@<%= user.username %> </p>
                             <% if(isMyProfile) { %>
                             <p>
                                 <a id= "addSongBtn" href="/songs/new" class="btn btn-success">
-                                     Add a new song</a>
+                                    <i class="fas fa-upload"></i> Add a new song</a>
                             </p>
                             <% } %>
                         </div>
