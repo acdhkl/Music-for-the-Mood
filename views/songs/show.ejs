@@ -8,7 +8,7 @@
 				<div class="list-group">
                     <% song.authors.forEach(function(user){ %>
                         <li class="list-group-item ">
-                            <a href="/profile/<%=user.id %>"><%= user.firstName + " " + user.lastName.substring(0,1) + "."%> </a>
+                            <a href="/profile/<%=user.id %>"><%= user.firstName %> </a>
                         </li>
                     <% }) %> 
 				</div>
