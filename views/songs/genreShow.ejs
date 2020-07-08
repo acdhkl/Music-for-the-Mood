@@ -1,0 +1,67 @@
+<%- include("../partials/header") %>
+
+<div id="heading<%= genre.replace(/\s+/g, '') %>" class="jumbotron jumbotron-fluid backgroundImage">
+    <div class="container">
+        <div class="text-center">
+            <button class="btn btn-lg btn jumbotronHeader" type="button">
+                <p class="lead text-center">The most popular </p>
+                <h1 class="display-1 text-center"><%= genre %></h1>
+                <p class="lead text-center">songs of today</p>
+            </button>
+        </div>
+
+    </div>
+</div>
+<div class="text-center">
+    <p>
+        <a id="addSongBtn" href="/songs/new" class="btn btn-success">
+            <i class="fas fa-upload"></i> Add to this mood
+        </a>
+    </p>
+</div>
+
+<% var songsOfGenre = songs.filter(song => song.type.toLowerCase() === genre.toLowerCase()).
+    sort(function(a,b){return b.authors.length-a.authors.length});%>
+<div class="card-body">
+    <div class="row">
+        <% for(var i = 0; i < songsOfGenre.length; i++){%>
+        <% if(songsOfGenre[i] == undefined){ %>
+        <% break; %>
+        <% } else{ %>
+        <div class="cards col-sm-6 col-lg-3" style="margin-bottom: 15px;">
+            <iframe class=" card-img-top" src="https://open.spotify.com/embed/track/<%= songsOfGenre[i].spotifyId%>"
+                height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <div class="card-block">
+                <p class="upvotes"><i class="fas fa-thumbs-up"></i> <%= songsOfGenre[i].authors.length %> </p>
+                <div role="group" aria-label="Basic example">
+                    <p>
+                        <% if(currentUser){ %>
+
+                        <% if(currentUser.songs.includes(songsOfGenre[i]._id)){ %>
+                    <form class="float-left">
+                        <button class="btn btn-success" disabled title="Remove from my collection"><i
+                                class="fas fa-check"></i></i></button>
+                    </form>
+
+                    <% } else { %>
+
+                    <form class="float-left" action="/songs/<%= songsOfGenre[i]._id %>?_method=PUT" method="POST">
+                        <button class="btn btn-success"><i class="fas fa-thumbs-up"></i></button>
+                    </form>
+                    <% } %>
+                    <% } %>
+                    </p>
+                    <form class="float-right" action="/songs/<%= songsOfGenre[i]._id %>" method="GET">
+                        <button class="btn btn-info">More info</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <% } }%>
+    </div>
+</div>
+</div>
+
+
+<%- include("../partials/footer") %>

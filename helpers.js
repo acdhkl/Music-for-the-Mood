@@ -31,7 +31,7 @@ helpersObj.shuffle = function shuffle(a) {
         a[j] = x;
     }
     return a;
-}
+};
 
 helpersObj.compare = function (a, b) {
     if (a.authors.length < b.authors.length) {
@@ -41,6 +41,6 @@ helpersObj.compare = function (a, b) {
         return -1;
     }
     return 0;
-}
+};
 
 module.exports = helpersObj;

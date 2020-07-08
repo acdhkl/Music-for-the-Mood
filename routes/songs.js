@@ -129,7 +129,6 @@ router.post('/songs/:id/:genre', helpers.isLoggedIn, function (req, res) {
             } else {
                 //Check if the user owns song already
                 var userOwns = false;
-                console.log(matchingSong.authors)
                 if (matchingSong.authors.filter(e => e.username === req.user.username).length > 0) {
                     userOwns = true;
                 }
@@ -201,8 +200,27 @@ router.get("/songs/:id", function (req, res) {
 router.get("/test", function (req, res) {
     spotify.request('https://api.spotify.com/v1/tracks/' + "2z3htsNRuhDN923ITatc56").then(function (data) {
         res.send(data);
-
     })
+});
+
+router.get("/genres/:name", function (req, res) {
+    Song.find({ type: req.params.name }, function (err, songsOfGenre) {
+        if (err) {
+            req.flash("error", err.message);
+            res.redirect('/songs');
+        } else {
+            if (genres.includes(req.params.name)) {
+                res.render("songs/genreShow", {
+                    genre: req.params.name,
+                    genres: genres,
+                    songs: songsOfGenre
+                });
+            } else {
+                req.flash("error", "That genre does not exist yet!");
+                res.redirect('/songs');
+            }
+        }
+    });
 });
 
 
@@ -212,7 +230,9 @@ module.exports = router;
 function addSongToUser(req, res, song) {
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username: req.user.username,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName
     };
     Song.findById(song.id, function (err, song) {
         User.findById(req.user._id, function (err, user) {
@@ -230,4 +250,17 @@ function addSongToUser(req, res, song) {
             }
         });
     })
+}
+
+function querySt(ji) {
+
+    hu = window.location.search.substring(1);
+    gy = hu.split("&");
+
+    for (i=0;i<gy.length;i++) {
+        ft = gy[i].split("=");
+        if (ft[0] == ji) {
+            return ft[1];
+        }
+    }
 }

@@ -66,7 +66,7 @@
     border: none;
     font-size: .90rem;
 }
-.card-header button {
+.card-header button, .jumbotronHeader{
     margin: 0;
     text-align: center !important;
     color: white;
@@ -95,10 +95,6 @@ iframe {
     align-items: center;
     height: 30vh;
     margin: 20px 0px 7px 7px;
-   
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 /* HEADING BACKGROUND IMAGES */
@@ -131,6 +127,28 @@ iframe {
 
 #headingSummerVibes {
     background-image: url("https://images.pexels.com/photos/1118448/pexels-photo-1118448.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+}
+
+.backgroundImage{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#viewAllBtn {
+    color: white;
+    font-weight: 400;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* GENRE SHOW PAGE */
+.jumbotronHeader {
+    background-color: rgba(14, 18, 43, 0.6) !important;
+}
+
+.jumbotronHeader:hover {
+    color: white;
 }
 
 

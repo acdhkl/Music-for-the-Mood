@@ -1,4 +1,5 @@
 <%- include("../partials/header") %>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
@@ -6,10 +7,11 @@
 					Find users who enjoy this song
 				</p>
 				<div class="list-group">
+					<% console.log(song.authors) %> 
                     <% song.authors.forEach(function(user){ %>
                         <li class="list-group-item ">
-                            <a href="/profile/<%=user.id %>"><%= user.firstName %> </a>
-                        </li>
+                            <a href="/profile/<%=user.id %>"> <%= user.firstName %> </a>
+						</li>
                     <% }) %> 
 				</div>
 			</div>
